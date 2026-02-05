@@ -18,6 +18,11 @@ app.use((req, res, next) => {
 // Serve static files from the dist directory
 app.use(express.static(path.join(__dirname, 'dist')));
 
+// Healthcheck for Railway
+app.get('/health', (req, res) => {
+    res.status(200).send('OK');
+});
+
 // Fallback to index.html for SPA routing
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
